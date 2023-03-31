@@ -5,21 +5,21 @@ This workshop uses the programming language **Python** to perform some common te
 ## Workshop Files
 
 #### Text Files
-- [The Origin of Species, Charles Darwin]()
-- [Dream Psychology, Sigmund Freud]()
-- [Frankenstein, Mary Shelley]()
-- [War of the Worlds, H.G. Wells]()
-- [Pride & Prejudice, Jane Austen]()
+- [The Origin of Species, Charles Darwin](https://raw.githubusercontent.com/DCS-training/SentimentAnalysis/main/darwin-origin.txt)
+- [Dream Psychology, Sigmund Freud](https://raw.githubusercontent.com/DCS-training/SentimentAnalysis/main/freud-dreams.txt)
+- [Frankenstein, Mary Shelley](https://raw.githubusercontent.com/DCS-training/SentimentAnalysis/main/shelley-frankenstein.txt)
+- [War of the Worlds, H.G. Wells](https://raw.githubusercontent.com/DCS-training/SentimentAnalysis/main/wells-war-worlds.txt)
+- [Pride & Prejudice, Jane Austen](https://raw.githubusercontent.com/DCS-training/SentimentAnalysis/main/austen-pride-prejudice.txt)
 
 #### CSV Files
-- [Trump Tweet Archive, Donald Trump]()
-- [Trump Tweet 2020 Tweets, Donald Trump]()
+- [Trump Tweet Archive, Donald Trump](https://raw.githubusercontent.com/DCS-training/SentimentAnalysis/main/trump-tweet-archive.csv)
+- [Trump Tweet 2020 Tweets, Donald Trump](https://raw.githubusercontent.com/DCS-training/SentimentAnalysis/main/trump-tweets-2020.csv)
 
 #### Text files with chapter tags
-- [Jane Eyre, Charlotte Bronte]()
-- [Frankenstein, Mary Shelley]()
-- [Pride and Prejudice, Jane Austen]()
-- [Wuthering Heights, Emily Bronte]()
+- [Jane Eyre, Charlotte Bronte](https://raw.githubusercontent.com/DCS-training/SentimentAnalysis/main/bronte-jane-eyre.txt)
+- [Frankenstein, Mary Shelley](https://raw.githubusercontent.com/DCS-training/SentimentAnalysis/main/shelley-frankenstein2.txt)
+- [Pride and Prejudice, Jane Austen](https://raw.githubusercontent.com/DCS-training/SentimentAnalysis/main/austen-pride.txt)
+- [Wuthering Heights, Emily Bronte](https://raw.githubusercontent.com/DCS-training/SentimentAnalysis/main/bronte-wuthering-heights.txt)
 
 ## Copyright
 
