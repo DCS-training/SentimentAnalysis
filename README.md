@@ -2,6 +2,24 @@
 
 This tutorial on Sentiment Analysis was developed for CDCS by **Dave Elsmore** (Edina). 
 This workshop uses the programming language **Python** to perform some common text analysis  tasks. The aim is that by using the pre-supplied code examples, and editing them to examine the different results, you will begin to gain an understand of the techniques used. 
+## Workshop Files
+
+#### Text Files
+- [The Origin of Species, Charles Darwin]()
+- [Dream Psychology, Sigmund Freud]()
+- [Frankenstein, Mary Shelley]()
+- [War of the Worlds, H.G. Wells]()
+- [Pride & Prejudice, Jane Austen]()
+
+#### CSV Files
+- [Trump Tweet Archive, Donald Trump]()
+- [Trump Tweet 2020 Tweets, Donald Trump]()
+
+#### Text files with chapter tags
+- [Jane Eyre, Charlotte Bronte]()
+- [Frankenstein, Mary Shelley]()
+- [Pride and Prejudice, Jane Austen]()
+- [Wuthering Heights, Emily Bronte]()
 
 ## Copyright
 
