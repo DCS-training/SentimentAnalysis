@@ -1,6 +1,6 @@
 # Sentiment Analysis
 
-This tutorial on Sentiment Analysis was developed for CDCS by **Dave Elsmore** (Edina). 
+This tutorial on Sentiment Analysis was developed for CDCS by **Dave Elsmore** (Edina) and updated by Xandra Dave Cochran. 
 This workshop uses the programming language **Python** to perform some common text analysis  tasks. The aim is that by using the pre-supplied code examples, and editing them to examine the different results, you will begin to gain an understand of the techniques used. 
 ## Workshop Files
 
