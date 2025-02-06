@@ -34,28 +34,27 @@ If you want more information on how to use RegEx (Regular Expression) via Python
 
 ### 1. Noteable
 
-If you are part of the University of Edinburgh you can use [Noteable](https://noteable.edina.ac.uk/) the cloud-based computational notebook system which work on your browser from any device.
+If you are part of the University of Edinburgh you can use [Noteable](https://noteable.edina.ac.uk/) the cloud-based computational notebook system which works on your browser from any device.
 
 To get started:
 
-#### Get the Notebook files for this tutorial
-Download the files listed on the right to a location on your computer
-Make sure you know the location they have been downloaded to (usually your 'Downloads' folder) as you will need to upload them to Noteable. (The filename should end with '.ipynb'. If your computer has appended '.txt' to the end of the file make sure this is removed)
 #### Start Noteable
 1.  Open the following link in a new tab:  [https://noteable.edina.ac.uk/login](https://noteable.edina.ac.uk/login)
-2.  Log in with your EASE credentials
+2.  Login with your EASE credentials
 3.  Under 'Standard Notebook' click 'Start'
 #### Upload the Notebook to Noteable
-1.  From the Noteable home page, click on the 'Upload' button at the top right of the screen and browse to one of the files you saved earlier to select it.
-2.  Now click the blue 'Upload' button to load it into Noteable
-3.  Once the file has been uploaded, click on the filename to start the Notebook
+1.  From the Noteable home page, click on the 'Git'>'Cone a Repository' button at the top bar of the screen and enter the link of this repo (https://github.com/DCS-training/SentimentAnalysis)[https://github.com/DCS-training/SentimentAnalysis]
+2.  Now click on Colone
+3.  You now have imported the full repo and you can see all the material within the folder names'SentimentAnalysis'
+4.  Double-click on 'intro_sentiment_analysis_2025.ipynb' to open the Notebook
+5.  Follow the instruction on the Notebook
 
 
 ### 2. Installing Python via Anaconda
 
 [Python][python] is great for general-purpose programming and is a popular language for scientific computing as well. Installing all of the packages required for this lessons individually can be a bit difficult, however, so we recommend the all-in-one installer [Anaconda][anaconda].
 
-Regardless of how you choose to install it, please make sure you install Pythonversion 3.x (e.g., Python 3.6 version). 
+Regardless of how you choose to install it, please make sure you install Python version 3.x (e.g., Python 3.6 version). 
 
 #### Windows - [Video tutorial][video-windows]
 
