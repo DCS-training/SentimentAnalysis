@@ -38,15 +38,21 @@ If you are part of the University of Edinburgh you can use [Noteable](https://no
 
 To get started:
 
-#### Start Noteable
+#### Start Noteable (for Python users)
 1.  Open the following link in a new tab:  [https://noteable.edina.ac.uk/login](https://noteable.edina.ac.uk/login)
 2.  Login with your EASE credentials
 3.  Under 'Standard Notebook' click 'Start'
-#### Upload the Notebook to Noteable
-1.  From the Noteable home page, click on the 'Git'>'Cone a Repository' button at the top bar of the screen and enter the link of this repo (https://github.com/DCS-training/SentimentAnalysis)[https://github.com/DCS-training/SentimentAnalysis]
-2.  Now click on Colone
+
+#### Start Noteable (for R users)
+1.  Open the following link in a new tab:  [https://noteable.edina.ac.uk/login](https://noteable.edina.ac.uk/login)
+2.  Login with your EASE credentials
+3.  Under 'RStudio' click 'start'
+   
+#### Upload the Notebook (and files) to Noteable
+1.  From the Noteable home page, click on the 'Git'>'Clone a Repository' button at the top bar of the screen and enter the link of this repo (https://github.com/DCS-training/SentimentAnalysis)[https://github.com/DCS-training/SentimentAnalysis]
+2.  Now click on Clone
 3.  You now have imported the full repo and you can see all the material within the folder names'SentimentAnalysis'
-4.  Double-click on 'intro_sentiment_analysis_2025.ipynb' to open the Notebook
+4.  Double-click on 'intro_sentiment_analysis_2025.ipynb' to open the Notebook for Python
 5.  Follow the instruction on the Notebook
 
 
