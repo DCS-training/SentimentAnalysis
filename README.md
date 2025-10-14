@@ -27,7 +27,7 @@ This repository has a [![License: CC BY-NC 4.0](https://licensebuttons.net/l/by-
 
 ## How to use this repository
 
-Inside this repository you are going to find a Jupyter Notebook and RMarkDown file that will allow learning how to perform sentiment analysis and a series of datasets (.txt files).
+Inside this repository you are going to find a Jupyter Notebook (for python users) and RMarkDown file (for R users) that will allow learning how to perform sentiment analysis and a series of datasets (.txt files). The analysis files work exactly the same and are set to suit preferences for either python or R.
 If you want more information on how to use RegEx (Regular Expression) via Python you can have a look to this [module](https://www.w3schools.com/python/python_regex.asp).
 
 ## How to use the Jupyter Notebooks
@@ -55,6 +55,7 @@ To get started:
 4.  Double-click on 'intro_sentiment_analysis_2025.ipynb' to open the Notebook for Python and 'intro_sentiment_analysis_2025.Rmd' if following the R version of this analysis.
 5.  Follow the instruction on the Notebook
 
+##### Noteable is the reccomended mode for University members since your EASE credentials provide easy access to the analysis and avoid further installation of any software or tools locally.
 
 ### 2. Installing Python via Anaconda
 
