@@ -30,7 +30,7 @@ This repository has a [![License: CC BY-NC 4.0](https://licensebuttons.net/l/by-
 Inside this repository you are going to find a Jupyter Notebook (for python users) and RMarkDown file (for R users) that will allow learning how to perform sentiment analysis and a series of datasets (.txt files). The analysis files work exactly the same and are set to suit preferences for either python or R.
 If you want more information on how to use RegEx (Regular Expression) via Python you can have a look to this [module](https://www.w3schools.com/python/python_regex.asp).
 
-## How to use the Jupyter Notebooks (python) & R analyses file
+## How to use the Jupyter Notebooks (python) & R analyses files
 
 ### 1. Noteable
 
