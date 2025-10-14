@@ -1,0 +1,403 @@
+---
+title: "Introduction to Sentiment Analysis (R)"
+author: "Aybuke Atalay"
+date: "2025-08-19"
+output:
+  github_document: default
+  html_document:
+    toc: true
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction to Sentiment Analysis
+
+We will use the R package `sentimentr` for this workshop.\
+There are other alternatives (e.g., *tidytext* with lexicons, or *syuzhet*), but `sentimentr` provides sentence-level sentiment with handling for **negation** (e.g., “not good”) and **valence shifters** (e.g., “very good”), and returns an overall **polarity score** comparable to `TextBlob` in Python.
+
+`sentimentr` works by identifying sentiment-bearing words, adjusting for nearby modifiers (negators/intensifiers/deintensifiers), and aggregating to sentence and document levels. The output is a continuous polarity measure centred on zero; scores farther from zero indicate stronger sentiment.
+
+Unlike `TextBlob`, however, `sentimentr` does not provide a subjectivity score.
+
+## Install Required Packages
+
+Run this once. If the package is already installed, you can skip it.
+
+```{r install, eval=FALSE}
+install.packages(c("tidyverse", "sentimentr", "lubridate","ggplot2", "dplyr", "stringr", "tibble"))
+```
+
+## Load Packages
+
+```{r libraries}
+library(tidyverse)
+library(sentimentr)
+library(lubridate)
+library(ggplot2)
+library(dplyr)
+library(stringr)
+library(tibble)
+```
+
+## Single Text Sentiment Analysis
+
+Let’s start with a simple example.\
+We will pass a single piece of text into `sentimentr`, obtain sentence-level scores, and then an overall score, which is comparable to TextBlob’s polarity.
+
+For results per sentence, we use the **sentiment()** function.
+
+For a single result of the whole text, we use **sentiment_by()** function
+
+```{r single-text}
+# Example text (parallel to the Python demo)
+input_text <- "I think that big tech is doing a horrible thing for our country. And I believe it is going to be a catastrophic mistake for them." #(Donald Trump, Nov 13, 2020)
+
+# Sentence-level sentiment
+sent_per_sentence <- sentiment(input_text)
+
+# One score for the whole text (averaged across sentences, length-adjusted)
+sent_overall <- sentiment_by(input_text)
+
+sent_per_sentence
+sent_overall
+```
+
+**Interpretation**\
+- `sent_per_sentence` reports a row per sentence with a `sentiment` value (negative = negative tone; positive = positive tone).\
+- `sent_overall$ave_sentiment` gives a single polarity value for the whole input. - Values close to 0 indicate neutral/slight sentiment; larger magnitudes indicate stronger sentiment.
+
+The first sentence got a result of -0.13 whereas second sentence got a score of -0.34, which means that the second sentence is more negative. The overall result should be -0.24, which is also negative.
+
+Let's try this again with a different piece of text.
+
+## Change the Input Text
+
+```{r single-text}
+# Example text (parallel to the Python demo)
+input_text <- "This is a terrific book, the writing is superb, overall an excellent read." # (Amazon review)
+
+# Sentence-level sentiment
+sent_per_sentence <- sentiment(input_text)
+
+# One score for the whole text (averaged across sentences, length-adjusted)
+sent_overall <- sentiment_by(input_text)
+
+sent_per_sentence
+sent_overall
+```
+
+This time, the text consists of a single sentence and got a score of 0.69 which is very positive.
+
+### A note on Writing Functions
+
+With `sentimentr`, sentence-level analysis is already handled for us — we don’t need to manually split the text (If you are using TextBlob in Python, note that it only provides an overall sentiment score for the text rather than sentence-level scores.)
+
+If your input is a dataframe column consisting of multiple rows, the sentiment() function will again analyse every sentence in the column. Therefore, you do not need to write a function to loop over the rows.
+
+## Working with a text file
+
+It is useful to be able to analyse a file rather than just a short text string.
+
+Our first dataset is here:
+
+<https://raw.githubusercontent.com/DCS-training/SentimentAnalysis/main/darwin-origin.txt>
+
+We can import it directly from GitHub
+
+You can see how different books score by changing which .txt file you are processing. Go to <https://github.com/DCS-training/SentimentAnalysis/blob/main/README.md>
+
+and see which other .txt files are available
+
+```{r read-darwin}
+# Read Darwin's "Origin of Species" from the repo
+url <- "https://raw.githubusercontent.com/DCS-training/SentimentAnalysis/main/darwin-origin.txt"
+# Read all lines of the text file
+darwin_origin_lines <- readLines(url, warn = FALSE)
+# Collapse into a single string
+darwin_origin <- paste(darwin_origin_lines, collapse = " ")
+```
+
+Now we switch from short strings to a full text file. We read the file from URL. Next we will (i) run sentiment analysis, and (ii) print rounded results with a simple sentiment label.
+
+## Analyse the Text File
+
+```{r run-darwin}
+# Polarity by Sentence
+polarity_sentence <- sentiment(darwin_origin)
+
+# Overall polarity
+polarity <- sentiment_by(darwin_origin)$ave_sentiment
+
+#To round up the score:
+round(polarity, 2)
+```
+
+### Try diffent text files
+
+Experiment by analysing different text files. A selection can be found on the workshop home page (or use a file of you own choosing):
+
+<https://github.com/DCS-training/SentimentAnalysis/blob/main/README.md>
+
+## CSV Files
+
+You will often have data contained in a CSV file that you wish to analyse, this could be: the results of a survey, export from a database, collection of tweets.
+
+The following code example takes as its input a CSV file containing all Donald Trump's tweets in 2020, analyses each one for sentiment and creates a new CSV file containing the original text plus two new columns containing the Sentiment and Polarity.
+
+We can access the example CSV files directly from GitHub:
+
+<https://raw.githubusercontent.com/DCS-training/SentimentAnalysis/main/trump-tweet-archive.csv>
+
+```{r trump-tweets}
+url <- "https://raw.githubusercontent.com/DCS-training/SentimentAnalysis/main/trump-tweets-2020.csv"
+
+# Read CSV into a tibble
+trump_tweets <- readr::read_csv(url)
+
+# Show the first 10 rows
+head(trump_tweets, 10)
+```
+
+Let's set the data-types in our dataframe to match the data:
+
+```{r trump-tweets}
+# Convert column types
+trump_tweets <- trump_tweets %>%
+  mutate(
+    id = as.numeric(id),
+    created_at = dmy_hm(created_at),   # parse day/month/year hour:minute
+    text = as.character(text)
+  )
+
+# Check data types
+str(trump_tweets)
+
+# Show first 10 rows
+head(trump_tweets, 10)
+```
+
+Running the sentiment analysis per tweet:
+
+```{r trump-tweets}
+#Create Sentiment Scores per tweet
+trump_tweets$sentiment_score <- sentiment_by(trump_tweets$text)$ave_sentiment
+
+# Label Tweet Sentiment (using ifelse function from base R)
+trump_tweets$sentiment <- ifelse(
+  trump_tweets$sentiment_score > 1e-6, "Positive",
+  ifelse(trump_tweets$sentiment_score < -1e-6, "Negative", "Neutral")
+)
+
+head(trump_tweets)
+
+```
+
+Saving the new CSV:
+
+```{r trump-tweets}
+write.csv(trump_tweets, file = "./trump-tweets-2020-sentiment.csv", row.names = FALSE)
+
+```
+
+## Creating a Pie Chart of Sentiment of this CSV file
+
+Now we have scored each tweet for sentiment, using the R Library `ggplot2` it is easy to visualise the aggregate sentiment in this CSV file.
+
+The following code block counts up the total number of each positive, negative and neutral tweets and outputs the result as a Pie Chart.
+
+```{r}
+# We don't need to load the data again - we already have it stored as `trump_tweets`:
+# but in case anyone is running these in separate sessions:
+# trump_tweets <- read.csv("trump-tweets-2020-sentiment.csv")
+
+# Count sentiment categories
+sentiment_counts <- trump_tweets %>%
+  count(sentiment)   
+
+print(sentiment_counts)
+
+# Pie chart with ggplot2
+ggplot(sentiment_counts, aes(x = "", y = n, fill = sentiment)) +
+  geom_col(width = 1, color = "white") +
+  coord_polar(theta = "y") +
+  labs(title = "Sentiment Analysis of Trump Tweets") +
+  theme_void() +
+  scale_fill_manual(values = c("Positive" = "green", 
+                               "Negative" = "red", 
+                               "Neutral" = "orange"))
+
+# Bonus task: Can you do a similar analysis of just the retweets? Or everything but the retweets?
+```
+
+## Sentiment by Keyword
+
+Now that we have a CSV file scored for sentiment, we can search the file for a particular keyword. The following code searches the tweets in our CSV file for a keyword and for every hit, prints out the text with a polarity score at the end, and also provides an overall sentiment score. Try changing the original keyword to one of your own choosing.
+
+```{r}
+# We don't need to load the data again - we already have it stored as`trump_tweets
+# but in case anyone is running these in separate sessions:
+# trump_tweets = pd.read_csv('trump-tweets-2020-sentiment.csv')
+
+keyword <- "dog"
+
+tweets_kw <- trump_tweets %>%
+  filter(str_detect(tolower(text), keyword))
+
+count <- nrow(tweets_kw)
+avg_polarity <- mean(tweets_kw$sentiment_score, na.rm = TRUE)
+
+# Print the sentiment score and label for the keyword
+if (count > 0) {
+  label <- ifelse(avg_polarity > 1e-6, "Positive",
+                  ifelse(avg_polarity < -1e-6, "Negative", "Neutral"))
+  
+  cat("==================================================\n")
+  cat(sprintf('%d occurrences of "%s" found in text\n', count, keyword))
+  cat(sprintf("Average Sentiment: %s\n", label))
+  cat(sprintf("Average Polarity: %.3f\n", avg_polarity))
+  cat("==================================================\n")
+} else {
+  cat("==================================================\n")
+  cat(sprintf('No occurrences of "%s" found in text\n', keyword))
+  cat("==================================================\n")
+}
+```
+
+## Analysing a text file by keyword
+
+We can do a similar analysis by keyword of a text file. Here we will use the 'origin-intro.txt' which is stored in Github. The code will read the text sentence by sentence so we can analyse the keyword in context rather than just providing an overall result. Try changing the keyword, but also experiment with different text files.
+
+```{r}
+
+# Read raw text
+url <- "https://raw.githubusercontent.com/DCS-training/SentimentAnalysis/main/darwin-origin.txt"
+darwin_text <- read_file(url)
+
+# Split into sentences and flatten to a simple character vector
+sentences_vec <- unlist(get_sentences(darwin_text))
+
+# Score sentiment per sentence
+scores <- sentiment(sentences_vec)
+
+# Keep only sentence text and score
+darwin_df <- tibble(
+  sentence_id = seq_along(sentences_vec),
+  sentence    = sentences_vec,
+  sentiment   = scores$sentiment
+)
+
+head(darwin_df, 10)
+
+# Keyword searching
+keyword <- "natural"
+
+# Filter sentences containing the keyword
+darwin_df_kw <- darwin_df %>%
+  filter(str_detect(str_to_lower(sentence), str_to_lower(keyword)))
+
+# Summarise count and average sentiment
+count <- nrow(darwin_df_kw)
+avg_polarity <- mean(darwin_df_kw$sentiment, na.rm = TRUE)
+
+# Print a short summary (same boundaries as Python)
+label <- ifelse(avg_polarity > 1e-6, "Positive",
+         ifelse(avg_polarity < -1e-6, "Negative", "Neutral"))
+
+cat(sprintf('%d occurrences of "%s"\n', count, keyword))
+cat(sprintf('Average polarity: %.3f (%s)\n', avg_polarity, label))
+
+```
+
+## Analysing a text by sections
+
+Often you will want to analyse the different sections of a text to compare sentiment throughout. For example, analysing the sentiment of different chapters in a novel. To do this, it is necessary to identify in the text the various sections you wish to examine. Although it is often possible to use R to do this, because the structure of documents can vary, it is often easier to mark up the document manually. In the following example, I have taken a novel (Pride and Prejudice by Jane Austen) and inserted <chapter></chapter> tags to indicate where a chapter begins and ends.
+
+<chapter> CHAPTER 1 It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife... </chapter>
+
+<chapter> CHAPTER 2 Mr. Bennet was among the earliest of those who waited on Mr. Bingley... </chapter>
+
+You can download it from here
+
+<https://raw.githubusercontent.com/DCS-training/SentimentAnalysis/main/austen-pride-prejudice.txt>
+
+### Analyse by Chapter
+
+Once you have uploaded the Pride and Prejudice text, run the following code block.
+
+This will analyse each chapter for sentiment, print out a score for each chapter and an overall score. I will also create a csv file (named the same as the input file but with a .csv extension) that can be used to create a visualisation.
+
+```{r}
+text_url <- "https://raw.githubusercontent.com/DCS-training/SentimentAnalysis/main/austen-pride.txt"
+csv_name <- "austen-pride.csv"
+
+# Download whole file as a single string
+book <- read_file(text_url)
+
+# Extract title & author from tags
+title  <- str_match(book,  "<title>(.*?)</title>")[, 2]
+author <- str_match(book, "(?s)<author>(.*?)</author>")[, 2]  # (?s) = dot matches newlines
+title  <- ifelse(is.na(title),  "", str_squish(title))
+author <- ifelse(is.na(author), "", str_squish(author))
+
+# Split into chapters using <chapter> ... </chapter>
+chapter_matches <- str_match_all(book, "(?s)<chapter>(.*?)</chapter>")[[1]]
+chapters <- chapter_matches[, 2]  # captured groups
+if (length(chapters) == 0) stop("No <chapter>...</chapter> sections found.")
+
+# Sentiment per chapter (average polarity)
+chapter_polarity <- sapply(
+  chapters,
+  function(ch) sentiment_by(ch)$ave_sentiment
+)
+
+# Classify
+classify_sentiment <- function(p, eta = 1e-6) {
+  if (p >  eta) "Positive"
+  else if (p < -eta) "Negative"
+  else "Neutral"
+}
+
+chapters_df <- tibble(
+  chapter  = seq_along(chapters),
+  polarity = chapter_polarity
+) %>%
+  mutate(sentiment = sapply(polarity, classify_sentiment))
+
+# Save to CSV
+write_csv(chapters_df, csv_name)
+cat("CSV created: -", csv_name, "\n")
+
+# Display chapter analysis 
+print(chapters_df)
+
+avg_sent <- mean(chapters_df$polarity, na.rm = TRUE)
+cat("***************************************\n")
+cat(title, "\nby\n", author, "\n", sep = "")
+cat(sprintf("Average chapter sentiment = %.3f\n", avg_sent))
+cat("***************************************\n")
+```
+
+## Create a Barchart to illustrate results
+
+Using the CSV file created with previous piece of code we can create a visualisation.
+
+```{r}
+ggplot(chapters_df, aes(x = chapter, y = polarity)) +
+  geom_col(fill = "steelblue") +
+  labs(
+    title = "Pride and Prejudice - Sentiment by Chapter",
+    x = "Chapter",
+    y = "Polarity"
+  ) +
+  theme_minimal()
+
+```
+
+## Further Exercises
+
+Experiment by analysing different text files. A selection can be found on this GitHub Repo. You can either save them to your PC and import them or import them directly from the GitHub Repo. If you are using Noteable, once the file has been saved to your computer, go back to the Noteable home tab in the browser.
+
+Select 'Upload' from the top right of the page. Browse to the file. Click 'Select' Click on the blue 'Upload' button The file is now available for use in Noteable.
