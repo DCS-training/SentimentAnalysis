@@ -27,7 +27,7 @@ This repository has a [![License: CC BY-NC 4.0](https://licensebuttons.net/l/by-
 
 ## How to use this repository
 
-Inside this repository you are going to find an a Jupyter Notebooks that will allow learning how to perform sentiment analysis and a series of datasets (.txt files).
+Inside this repository you are going to find a Jupyter Notebook and RMarkDown file that will allow learning how to perform sentiment analysis and a series of datasets (.txt files).
 If you want more information on how to use RegEx (Regular Expression) via Python you can have a look to this [module](https://www.w3schools.com/python/python_regex.asp).
 
 ## How to use the Jupyter Notebooks
