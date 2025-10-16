@@ -21,23 +21,23 @@ This workshop uses the programming language **Python** and **R** to perform some
 - [Pride and Prejudice, Jane Austen](https://raw.githubusercontent.com/DCS-training/SentimentAnalysis/main/austen-pride.txt)
 - [Wuthering Heights, Emily Bronte](https://raw.githubusercontent.com/DCS-training/SentimentAnalysis/main/bronte-wuthering-heights.txt)
 
-#### Useful resources and links
+### Useful resources and links
 
 If you'd like to continue with text analysis beyond TextBlob used in the notebooks for this session, you may be interested in exploring:
-- [**NLTK**, python natural language toolkit](https://www.nltk.org/index.html)
-- [NLTK, freely available book guide](https://www.nltk.org/book/)
-- [NLTK, guide in python](https://realpython.com/python-nltk-sentiment-analysis/)
-- [**spaCY** , a python package - includes sentiment analysis](https://spacy.io/usage)
+- **NLTK**, python natural language toolkit ([link](https://www.nltk.org/index.html))
+- NLTK, freely available book guide ([link](https://www.nltk.org/book/))
+- NLTK, guide in python ([link](https://realpython.com/python-nltk-sentiment-analysis/))
+- **spaCY** , a python package - includes sentiment analysis ([link](https://spacy.io/usage))
   
 ---
 
 You may be interested in visualisng outputs from your analyses for example a word cloud, or bar charts for positive/negative valence, counts of top terms in your text and so forth:
 
 > **Note**: data should be pre-processed and ready for visualising your final outputs, this can include removing stop words for instance.
-- [Matplotlib, a python library for visualising outputs](https://matplotlib.org/stable/users/explain/quick_start.html#quick-start)
-- [Seaborn, a python library](https://seaborn.pydata.org/)
-- [Plotly, a python library for interactive visualisations](https://plotly.com/python/)
-- [ggplot2, an R visualisation library](https://ggplot2.tidyverse.org/)
+- Matplotlib, a python library for visualising outputs ([link](https://matplotlib.org/stable/users/explain/quick_start.html#quick-start))
+- Seaborn, a python library ([link](https://seaborn.pydata.org/))
+- Plotly, a python library for interactive visualisations ([link](https://plotly.com/python/))
+- ggplot2, an R visualisation library ([link](https://ggplot2.tidyverse.org/))
 
 ## Copyright
 
