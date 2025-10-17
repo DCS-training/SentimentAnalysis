@@ -65,8 +65,15 @@ To get started:
 1.  Open the following link in a new tab:  [https://noteable.edina.ac.uk/login](https://noteable.edina.ac.uk/login)
 2.  Login with your EASE credentials
 3.  Under 'RStudio' click 'start'
+
+#### Upload the Notebook (and files) to Noteable (for R users)
+1.  Once you opened RStudio, click on "Project (None)", then click on "New Project"
+2.  Select Version Control, then select Git
+3.  Under Repository URL, paste https://github.com/DCS-training/SentimentAnalysis
+4.  Your project directory name will be automatically created once you paste the URL, you can change it if you want.
+5.  Click on Create Project, which will clone the project to Noteable. You will be able to see all the folders and files, including  the intro_sentiment_analysis_2025.Rmd, which will be the code that you will be following.
    
-#### Upload the Notebook (and files) to Noteable
+#### Upload the Notebook (and files) to Noteable (for Python users)
 1.  From the Noteable home page, click on the 'Git'>'Clone a Repository' button at the top bar of the screen and enter the link of this repo [https://github.com/DCS-training/SentimentAnalysis.git](https://github.com/DCS-training/SentimentAnalysis.git)
 2.  Now click on Clone
 3.  You now have imported the full repo and you can see all the material within the folder names'SentimentAnalysis'
