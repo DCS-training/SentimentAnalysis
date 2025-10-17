@@ -67,7 +67,7 @@ To get started:
 3.  Under 'RStudio' click 'start'
    
 #### Upload the Notebook (and files) to Noteable
-1.  From the Noteable home page, click on the 'Git'>'Clone a Repository' button at the top bar of the screen and enter the link of this repo (https://github.com/DCS-training/SentimentAnalysis)[https://github.com/DCS-training/SentimentAnalysis]
+1.  From the Noteable home page, click on the 'Git'>'Clone a Repository' button at the top bar of the screen and enter the link of this repo [https://github.com/DCS-training/SentimentAnalysis.git](https://github.com/DCS-training/SentimentAnalysis.git)
 2.  Now click on Clone
 3.  You now have imported the full repo and you can see all the material within the folder names'SentimentAnalysis'
 4.  Double-click on 'intro_sentiment_analysis_2025.ipynb' to open the Notebook for Python and 'intro_sentiment_analysis_2025.Rmd' if following the R version of this analysis.
